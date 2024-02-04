@@ -1,5 +1,6 @@
 package com.workintech.Javas18Challenge.controller;
 
+import com.workintech.Javas18Challenge.dto.BookResponse;
 import com.workintech.Javas18Challenge.entity.Author;
 import com.workintech.Javas18Challenge.entity.Book;
 import com.workintech.Javas18Challenge.entity.Category;
@@ -32,8 +33,9 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}")
-    public Book findById(@PathVariable long id) {
-        return bookService.findById(id);
+    public BookResponse findById(@PathVariable long id) {
+        Book foundBook = bookService.findById(id);
+        return new BookResponse(foundBook.getId(), foundBook.getName(), foundBook.getAuthor().getFirstName(),foundBook.getAuthor().getLastName());
     }
 
     @PostMapping("/book/{categoryId}")
