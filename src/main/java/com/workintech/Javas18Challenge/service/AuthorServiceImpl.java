@@ -30,13 +30,14 @@ public class AuthorServiceImpl implements AuthorService{
          if(foundAuthor.isPresent()){
              return foundAuthor.get();
          }
-         return null;
+         throw new RuntimeException("Author with given id is not found:"+id);
 
 
     }
 
     @Override
     public Author save(Author author) {
+
         return authorRepository.save(author);
     }
 

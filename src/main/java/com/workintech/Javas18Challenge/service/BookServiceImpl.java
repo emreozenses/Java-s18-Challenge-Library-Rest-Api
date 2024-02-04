@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class BookServiceImpl implements BookService {
 
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
     public BookServiceImpl(BookRepository bookRepository) {
@@ -26,13 +26,12 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book findById(long id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
-        if(optionalBook.isPresent()){
+        if (optionalBook.isPresent()) {
             return optionalBook.get();
         }
+            throw new RuntimeException("Given book id not exist:"+id);
 
-        return null;
     }
-
     @Override
     public Book save(Book book) {
         return bookRepository.save(book);

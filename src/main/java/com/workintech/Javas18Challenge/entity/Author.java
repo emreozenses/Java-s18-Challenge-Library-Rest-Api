@@ -1,5 +1,6 @@
 package com.workintech.Javas18Challenge.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,9 +27,19 @@ public class Author {
     @Column(name = "last_name")
     private String lastName;
 
+    @JsonIgnore
     @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
             CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "author")
-    private List<Book> bookList = new ArrayList<>();
+    private List<Book> bookList;
+
+    public void addBook(Book book){
+
+        if(bookList == null){
+            bookList = new ArrayList<>();
+
+        }
+        bookList.add(book);
+    }
 
 
 }

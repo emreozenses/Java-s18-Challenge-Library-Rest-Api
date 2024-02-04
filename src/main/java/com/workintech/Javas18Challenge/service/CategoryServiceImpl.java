@@ -29,8 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (optionalCategory.isPresent()){
             return optionalCategory.get();
         }
-
-        return null;
+        throw new RuntimeException("Given category id is not exist:"+id);
     }
 
     @Override
