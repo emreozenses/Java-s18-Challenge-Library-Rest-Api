@@ -1,6 +1,8 @@
 package com.workintech.Javas18Challenge.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,8 @@ public class Book {
     private long id;
 
     @Column(name = "name")
+    @NotNull
+    @Size(min = 3,max = 45,message = "İsim, 45 karaakterden büyük,3 karakterden küçük olamaz!")
     private String name;
 
 

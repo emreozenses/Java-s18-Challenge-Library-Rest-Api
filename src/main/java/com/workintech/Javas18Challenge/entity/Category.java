@@ -2,6 +2,8 @@ package com.workintech.Javas18Challenge.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +24,11 @@ public class Category {
     private long id;
 
     @Column(name = "name")
+    @Size(min = 3,max = 45,message = "İsim, 45 karaakterden büyük,3 karakterden küçük olamaz!")
+    @NotNull
     private String name;
 
-    @JsonIgnore
+
     @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
              CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "category")
     private List<Book> bookList;
