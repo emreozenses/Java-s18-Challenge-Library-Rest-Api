@@ -1,8 +1,10 @@
 package com.workintech.Javas18Challenge.service;
 
 import com.workintech.Javas18Challenge.entity.Category;
+import com.workintech.Javas18Challenge.exceptions.CategoryException;
 import com.workintech.Javas18Challenge.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (optionalCategory.isPresent()){
             return optionalCategory.get();
         }
-        throw new RuntimeException("Given category id is not exist:"+id);
+        throw new CategoryException("Given category id is not exist:"+id, HttpStatus.NOT_FOUND);
     }
 
     @Override

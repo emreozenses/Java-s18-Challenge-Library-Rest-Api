@@ -1,8 +1,10 @@
 package com.workintech.Javas18Challenge.service;
 
 import com.workintech.Javas18Challenge.entity.Author;
+import com.workintech.Javas18Challenge.exceptions.AuthorException;
 import com.workintech.Javas18Challenge.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class AuthorServiceImpl implements AuthorService{
          if(foundAuthor.isPresent()){
              return foundAuthor.get();
          }
-         throw new RuntimeException("Author with given id is not found:"+id);
+         throw new AuthorException("Author with given id is not found:"+id, HttpStatus.NOT_FOUND);
 
 
     }

@@ -1,8 +1,10 @@
 package com.workintech.Javas18Challenge.service;
 
 import com.workintech.Javas18Challenge.entity.Book;
+import com.workintech.Javas18Challenge.exceptions.BookException;
 import com.workintech.Javas18Challenge.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public class BookServiceImpl implements BookService {
         if (optionalBook.isPresent()) {
             return optionalBook.get();
         }
-            throw new RuntimeException("Given book id not exist:"+id);
+            throw new BookException("Given book id not exist:"+id, HttpStatus.NOT_FOUND);
 
     }
     @Override
