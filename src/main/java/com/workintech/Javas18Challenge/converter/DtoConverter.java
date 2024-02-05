@@ -54,9 +54,15 @@ public class DtoConverter {
     }
     public static List<BookResponse> convertToBookResponseList (List<Book> books){
         List<BookResponse> bookResponseList = new ArrayList<>();
-        books.forEach(book -> {
-            bookResponseList.add(convertToBookResponse(book));
-        });
+        if(books == null){
+            return null;
+        }
+
+        else {
+            books.forEach(book -> {
+                bookResponseList.add(convertToBookResponse(book));
+            });
+        }
         return bookResponseList;
     }
 

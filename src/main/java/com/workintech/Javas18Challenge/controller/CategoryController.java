@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Validated
 @RequestMapping("/workintech")
 public class CategoryController {
 
@@ -33,13 +32,13 @@ public class CategoryController {
     }
 
     @PostMapping("/category")
-    public CategoryResponse save(@RequestBody Category category){
+    public CategoryResponse save(@Validated @RequestBody Category category){
 
         return DtoConverter.convertToCategoryResponse(categoryService.save(category));
     }
 
     @PutMapping("/category/{id}")
-    public CategoryResponse update(@RequestBody Category category,@PathVariable long id){
+    public CategoryResponse update(@Validated @RequestBody Category category,@PathVariable long id){
         Category willUpdate =  categoryService.findById(id);
         willUpdate.setName(category.getName());
         return DtoConverter.convertToCategoryResponse(categoryService.save(willUpdate));
